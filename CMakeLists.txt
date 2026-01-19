@@ -23,16 +23,14 @@ target_include_directories(rayPro PRIVATE
 # Platform-specific settings
 if (WIN32)
     # Windows-specific settings
-    set(RAYLIB_DIR "C:/raylib") # 假设 raylib 安装在 C:/raylib 这里要修改为你实际的路径
+    set(RAYLIB_DIR "C:/raylib") # Assume raylib is installed in C:/raylib
     include_directories(${RAYLIB_DIR}/include)
     link_directories(${RAYLIB_DIR}/lib)
     target_link_libraries(rayPro raylib)
 elseif (UNIX)
-    # Unix-specific settings
+    # Linux/Unix-specific settings
     set(CMAKE_PREFIX_PATH /usr/local/lib)
     find_package(raylib REQUIRED)
     include_directories(${RAYLIB_INCLUDE_DIRS})
-    link_directories(/usr/local/lib)
-    target_link_libraries(rayPro raylib m pthread dl)
     target_link_libraries(rayPro ${RAYLIB_LIBRARIES} m pthread dl)
 endif()
