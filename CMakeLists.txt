@@ -1,34 +1,24 @@
-# Minimum CMake version required
-cmake_minimum_required(VERSION 3.10)
+cmake_minimum_required(VERSION 3.20)
+project(rayengine C)
 
-# Project name
-project(rayPro)
-
-# Set the C standard
-set(CMAKE_C_STANDARD 99)
-
-# Automatically include all .c files in src and its subdirectories
+set(CMAKE_C_STANDARD 11)
 file(GLOB_RECURSE SOURCES "${CMAKE_SOURCE_DIR}/src/*.c")
-
-# Add the executable
-add_executable(rayPro ${SOURCES})
-
-# Include directories
-target_include_directories(rayPro PRIVATE
+add_executable(rayengine ${SOURCES})
+target_include_directories(rayengine PRIVATE 
     ${CMAKE_SOURCE_DIR}/include
     ${CMAKE_SOURCE_DIR}/include/lua_header
-    ${CMAKE_SOURCE_DIR}/test
+    ${CMAKE_SOURCE_DIR}/3rdlib/raylib-5.5/include
 )
 
-# Platform-specific settings
 if (WIN32)
-    # Windows-specific settings
-    set(RAYLIB_DIR "C:/raylib") # Assume raylib is installed in C:/raylib
+    target_link_libraries(rayengine PRIVATE
+        ${CMAKE_SOURCE_DIR}/3rdlib/raylib-5.5/lib/raylibdll.lib
+    )
+    
     include_directories(${RAYLIB_DIR}/include)
     link_directories(${RAYLIB_DIR}/lib)
-    target_link_libraries(rayPro raylib)
+    link_directories(${CMAKE_SOURCE_DIR}/3rdlib/raylib-5.5/lib)
 elseif (UNIX)
-    # Linux/Unix-specific settings
     set(CMAKE_PREFIX_PATH /usr/local/lib)
     find_package(raylib REQUIRED)
     include_directories(${RAYLIB_INCLUDE_DIRS})
