@@ -14,7 +14,12 @@ if (WIN32)
     target_link_libraries(rayengine PRIVATE
         ${CMAKE_SOURCE_DIR}/3rdlib/raylib-5.5/lib/raylibdll.lib
     )
-    
+    # 3. 运行时拷贝 dll（关键！）
+    add_custom_command(TARGET rayengine POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_if_different
+            ${CMAKE_SOURCE_DIR}/3rdlib/raylib-5.5/lib/raylib.dll
+            $<TARGET_FILE_DIR:rayengine>
+    )
     include_directories(${RAYLIB_DIR}/include)
     link_directories(${RAYLIB_DIR}/lib)
     link_directories(${CMAKE_SOURCE_DIR}/3rdlib/raylib-5.5/lib)
