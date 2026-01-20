@@ -1,8 +1,10 @@
+#define RAYGUI_IMPLEMENTATION
 #include <stdio.h>
 #include <stdlib.h>
 #include "lualib.h"
 #include "lauxlib.h"
 #include "raylib.h"
+#include "raygui.h"
 
 int main() {
 	//lua_State* L = luaL_newstate(); // Create a new Lua state
@@ -17,6 +19,7 @@ int main() {
     {
         BeginDrawing();
         ClearBackground(BLACK);
+		GuiButton((Rectangle) { 350, 375, 100, 50 }, "Click Me");
         EndDrawing();
     }
     CloseWindow();
