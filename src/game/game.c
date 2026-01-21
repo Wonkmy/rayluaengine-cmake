@@ -2,7 +2,6 @@
 #define RAYGUI_IMPLEMENTATION
 #include "raylib.h"
 #include "raygui.h"
-#include "lualib.h"
 #include "../include/game/fish.h"
 
 void init_Impl(GameEngine* engine)
@@ -27,14 +26,18 @@ void GameEngine_Init(GameEngine* engine)
     engine->destroy = destroy;
 }
 
-void update(GameEngine* engine)
+void onload(GameEngine* engine)
 {
+    // 初始化代码
+}
 
+void update(GameEngine* engine, float dt)
+{
+    fishUpdate(dt);
 }
 
 void draw(GameEngine* engine)
 {
-    // GuiButton((Rectangle) { 350, 375, 100, 50 }, "开始游戏");
     fishDraw();
 }
 

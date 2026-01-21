@@ -12,7 +12,8 @@ int main() {
 
 	while (!WindowShouldClose())
     {
-		engine.update(&engine);
+		float dt = GetFrameTime();
+		engine.update(&engine, dt);
         BeginDrawing();
             ClearBackground(BLACK);
 			engine.draw(&engine);
