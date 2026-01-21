@@ -1,13 +1,6 @@
 #define GameWidth 1280
 #define GameHeight 720
 typedef struct GameEngine GameEngine;
-typedef struct FileData FileData;
-
-struct FileData
-{
-    char* name;
-    char* path;
-};
 
 struct GameEngine
 {

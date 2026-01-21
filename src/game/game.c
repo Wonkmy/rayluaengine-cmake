@@ -2,26 +2,21 @@
 #define RAYGUI_IMPLEMENTATION
 #include "raylib.h"
 #include "raygui.h"
+#include "lualib.h"
+#include "../include/game/fish.h"
 
-FileData *filedatas;
-
-Texture2D fishTexture;
 void init_Impl(GameEngine* engine)
 {
     engine->screenWidth = GameWidth;
     engine->screenHeight = GameHeight;
     engine->windowTitle = "SLG - Simple C Game";
-
     InitWindow(engine->screenWidth, engine->screenHeight, engine->windowTitle);
 
-    filedatas = malloc(sizeof(FileData) * 10); // 假设最多有10个文件
-    // 读取一个文件，并获取内容
-    char* file = LoadFileText("resources.txt");
-    char* filePath = strtok(file, "\n");
-    filedatas[0].name = "fish";
-    filedatas[0].path = filePath;
+    char* resPath = LoadFileText("resources.rc");
+    init(resPath);
 
-    fishTexture = LoadTexture(filedatas[0].path);
+    fishLoad("fish_blue");
+    UnloadFileText(resPath);
 }
 
 void GameEngine_Init(GameEngine* engine)
@@ -40,7 +35,7 @@ void update(GameEngine* engine)
 void draw(GameEngine* engine)
 {
     // GuiButton((Rectangle) { 350, 375, 100, 50 }, "开始游戏");
-    DrawTextureV(fishTexture, (Vector2){100, 100}, WHITE);
+    fishDraw();
 }
 
 void destroy(GameEngine* engine)
