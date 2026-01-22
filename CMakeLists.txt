@@ -8,6 +8,7 @@ add_executable(rayengine ${SOURCES})
 target_include_directories(rayengine PRIVATE
     ${CMAKE_SOURCE_DIR}/include
     ${CMAKE_SOURCE_DIR}/include/game
+    ${CMAKE_SOURCE_DIR}/include/generic
     ${CMAKE_SOURCE_DIR}/include/lua_header
     ${CMAKE_SOURCE_DIR}/3rdlib/raylib-5.5/include
     ${CMAKE_SOURCE_DIR}/3rdlib/raygui-4.0/src

@@ -2,7 +2,6 @@
 #define RAYGUI_IMPLEMENTATION
 #include "raylib.h"
 #include "raygui.h"
-#include "../include/game/fish.h"
 
 void init_Impl(GameEngine* engine)
 {
@@ -14,7 +13,6 @@ void init_Impl(GameEngine* engine)
     char* resPath = LoadFileText("resources.rc");
     init(resPath);
 
-    fishLoad("fish_blue");
     UnloadFileText(resPath);
 }
 
@@ -33,12 +31,11 @@ void onload(GameEngine* engine)
 
 void update(GameEngine* engine, float dt)
 {
-    fishUpdate(dt);
 }
 
 void draw(GameEngine* engine)
 {
-    fishDraw();
+    DrawRectangleV((Vector2){100,100}, (Vector2){200,200}, RED);
 }
 
 void destroy(GameEngine* engine)
